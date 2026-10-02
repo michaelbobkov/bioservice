@@ -6,7 +6,7 @@ from asgi_lifespan import LifespanManager  # noqa: F401  (см. requirements)
 from app.main import app
 
 
-@pytest_asyncio.fixture(scope="session")
+@pytest_asyncio.fixture(scope="session", loop_scope="session")
 async def client():
     async with LifespanManager(app):
         async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://t") as c:
