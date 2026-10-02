@@ -1,0 +1,14 @@
+<!doctype html>
+<meta charset="utf-8"><title>Сокращатель ссылок</title>
+<h1>Сокращатель ссылок</h1>
+<form id="f"><input id="u" type="url" placeholder="https://..." required size="50">
+<button>Сократить</button></form>
+<p id="out"></p>
+<script>
+f.onsubmit = async e => {
+  e.preventDefault();
+  const r = await fetch('/api/links', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({url: u.value})});
+  const j = await r.json();
+  out.innerHTML = r.ok ? `<a href="${j.short_url}">${j.short_url}</a>` : 'Ошибка';
+};
+</script>
