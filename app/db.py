@@ -15,5 +15,7 @@ async def init() -> None:
 
 
 async def close() -> None:
+    global pool
     if pool:
         await pool.close()
+        pool = None
