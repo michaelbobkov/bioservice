@@ -25,9 +25,11 @@ def make_code(n: int = 7) -> str:
 async def lifespan(app: FastAPI):
     await db.init()
     cache.init()
-    yield
-    await cache.close()
-    await db.close()
+    try:
+        yield
+    finally:
+        await cache.close()
+        await db.close()
 
 
 app = FastAPI(title="URL shortener", lifespan=lifespan)

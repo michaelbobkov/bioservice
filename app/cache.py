@@ -25,5 +25,7 @@ async def set(code: str, url: str) -> None:
 
 
 async def close() -> None:
+    global _client
     if _client:
         await _client.aclose()
+        _client = None
